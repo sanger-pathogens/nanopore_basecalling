@@ -21,11 +21,6 @@ This repository is for the code used for basecalling Nanopore data in either pod
 
    If a pre-downloaded model path is not provided to the pipeline, the model specified by the `--basecall_model` parameter will be downloaded on the fly.
 
-5. Clone the repository with required submodules
-
-   ```
-   git clone --recurse-submodules https://github.com/sanger-pathogens/long-read-ampliseq.git
-   ```
 
 ## Usage
 
