@@ -1,128 +1,52 @@
-# A template for Nextflow pipeline projects
+# Nanopore Basecalling 
+This repository is for the code used for basecalling Nanopore data in either pod5 or fast5 formats.
 
-This template will provide a skeleton project for a Nextflow pipeline to be deployed to the farm, according to the
-conventions developed by the PaM Informatics team.
+## Installation
+1. [Install Nextflow](https://www.nextflow.io/docs/latest/install.html)
 
-[[_TOC_]]
+2. [Install Docker](https://docs.docker.com/engine/install/)
 
-## Template contents
+3. Download the appropriate Dorado installer from the [repo](https://github.com/nanoporetech/dorado#installation). The path to the executable will be ```<path to downloaded folder>/bin/dorado```
 
-### Nextflow Pipeline
+4. (Optional) Download the appropriate Dorado model from the [repo](https://github.com/nanoporetech/dorado/#available-basecalling-models)
+    ```
+    # Download all models
+    dorado download --model all
+    # Download particular model
+    dorado download --model <model>
+    ```
+    If a pre-downloaded model path is not provided to the pipeline, the model specified by the `--basecall_model` parameter will be downloaded on the fly.
 
-#### Wrapper script
+5. Clone the repository with required submodules
+    
+    ```
+    git clone --recurse-submodules https://github.com/sanger-pathogens/long-read-ampliseq.git
+    ```
 
-The `nextflow-template.sh` script provides a wrapper which will run the nextflow pipeline. This file must have the same
-name as the git project (plus `.sh`).
-
-#### "Hello world" nf pipeline.
-
-The `main.nf` and `nextflow.config` files are included to provide a "hello world" pipeline.
-
-#### Module template
-
-A module template file `module.template` is provided. This includes placeholders of the form `{{placeholder_tag}}`
-which are replaced in the deployed module file, according to the
-[CI/CD pipeline configuration](https://gitlab.internal.sanger.ac.uk/sanger-pathogens/templates/ci-templates/-/blob/master/README.md?ref_type=heads#farm22pipeline-deployyml)
-
-### CI/CD pipeline
-
-The standard PaM Informatics nextflow deployment pipeline is included from the
-[CI/CD templates repo](https://gitlab.internal.sanger.ac.uk/sanger-pathogens/templates/ci-templates/).
-
-This includes checks to ensure that the pre-commit hooks have been run, some standard GitLab security scans, and
-deployment on tagging.
-
-#### Deployment
-
-A test deployment will be done whenever a tag starting with `t` is created; a prod deployment is done whenever a
-semantic version tag staring with `v` (e.g. v1.2.3) is created.
-
-Note that the `.gitlab-ci.yml` file has a section that disables deployment, just to prevent the template itself from
-being deployed to the farm. This section is marked by a comment, and should be deleted when the template is used for a
-real project that is intended to be deployed.
-
-Deployment includes:
-
-- Copying the wrapper script to the farm, removing the `.sh`, and making it executable.
-- Using the module template to create a module file on the farm.
-- Copying all other files that do _not_ start with `.` to the farm; this will include the Nextflow files and any other scripts etc. that have been added to the project.
-
-The deployment path is the value of the `FARM_PATH` variable in the deployment job, which should already be set to
-the standard "custom install" path we use for dev/prod deployments.
-
-### Workflow
-
-Some standard files are provides to help with development workflow.
-
-#### .gitignore file
-
-This contains common patterns matching files that should be kept out of git. This can help to keep secrets out of the
-repo, as well as clutter created by IDEs etc. Remember that secrets pushed to git by mistake will remain in the
-history, even if deleted!
-
-#### pre-commit configuration
-
-A recommended pre-commit config is included (`.pre-commit.yml`).
-
-Pre-commit hooks run before each commit automatically. We use them to auto-format code and to check for linting errors,
-for example. W/o running the hooks, the CI pipeline may fail.
-
-First, install pre-commit command itself if you don't have it already:
-
+## Usage
 ```
-pip install pre-commit
+nextflow run long-read-ampliseq/main.nf \
+--raw_read_dir <directory containing FAST5/POD5 files> \
+--reference <reference fasta> \
+--additional_metadata <CSV mapping sample IDs to barcodes> \
+--dorado_local_path <absolute path to Dorado executable> \
+-profile docker
 ```
+instead of `-profile docker`, you can run the pipeline with `-profile laptop`. As well as enabling docker, the laptop profile allows the pipeline to be used offline by providing a local copy of a configuration file that is otherwise downloaded.
 
-Then, run the following from the repository's folder to install the pre-commit hooks:
+Should you need to run the pipeline offline, it is best to make use of pre-populated dependency caches. These can be created with any of the supported profiles (e.g. `-profile docker`) and involves running the pipeline once to completion. You will also need to provide a `--basecall_model_path` (see installation step 4)- the laptop profile includes a default local path for this, as well as `--dorado_local_path`.
 
-```
-pre-commit install
-```
+You can override the default paths using the command line parameters directly when invoking nextflow or supplying an additional config file in which these parameters are set, using the `-c my_custom.config` nextflow option.
 
-##### .talismanrc file
+### Other parameters:
 
-This file configures talisman, which is included in the pre-commit config. See the
-[talisman documentation](https://github.com/thoughtworks/talisman/blob/main/README.md) to see how to deal with false
-positives.
+#### Basecalling
+- --basecall = "true"
+- --basecall_model = "dna_r10.4.1_e8.2_400bps_hac@v4.3.0"
+- --basecall_model_path = ""
+- --trim_adapters = "all"
+- --barcode_kit_name = ["SQK-NBD114-24"] (currently this can only be edited via the config file)
+- --read_format = "fastq"
 
-##### Running pre-commit hooks manually
-
-[pre-commit provides various options](https://pre-commit.com/#pre-commit-run) for running hooks manually; for example,
-so run all hooks on all files:
-
-```
-pre-commit run --all-files
-```
-
-## How to use this template
-
-### Create a new project from the template
-
-Start by creating a new project for your nextflow pipeline from the template
-
-- In gitlab, click the blue "New project button"
-- On the next screen, click on "Create from template"
-- On the next screen, select the "Group" tab
-- On the Group tab, next to "nextflow-template", click the blue "Use this template" button
-- Fill in the form on the next screen
-
-### Required changes in the project
-
-The following manual changes _must_ be made in your new project
-
-- Rename `nextflow-template.sh` to match your enw project name (plus `.sh` on the end).
-- Edit the manifest in `nextflow.config` to replace the placeholder name, description etc.
-- In `.gitlab-ci.yml`, delete the section which disables the deployment (see the comments in this file to identify the section you must delete).
-- If you will be using python, uncomment the sections in `.pre-commit.yaml` for python-related hooks (see the comments in this file); and make corresponding changes in `.gitlab-ci.yml` to re-enable the jobs that check the python-related hooks (again, see the comments).
-
-### Add your pipeline code
-
-When the steps above have been completed, you should have a working project that will deploy a module to the farm (test
-or prod, depending on the tag you use); but the pipeline provided will still be the "hello world" example.
-
-You can now edit `main.nf` and `nextflow.config` to add a real pipeline, and add any additional scripts or other files
-that are needed. The standard CI/CD piepline will copy all files that do not start with a `.` to the farm; it can
-be configured easily to rename and change modes of file, and to make substitutions of text within files if required.
-See the [CI/CD pipeline documentation](https://gitlab.internal.sanger.ac.uk/sanger-pathogens/templates/ci-templates/-/blob/master/README.md?ref_type=heads#farm22pipeline-deployyml)
-
-Remember that if additional executables are provided, these should be added to the `module.template` file.
+#### Saving output files
+- --save_fastqs = true

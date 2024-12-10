@@ -29,7 +29,7 @@ def printHelp() {
 //
 // SUBWORKFLOWS
 //
-
+include { BASECALLING                } from './subworkflow/basecalling.nf'
 
 /*
 ========================================================================================
