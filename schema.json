@@ -1,61 +1,61 @@
-{ 
-    "pipeline": "Strain-mapper (sub-workflow)",
-    "params": {
-        "Read mapping input parameters": {
-            "reference": {
-                "default": "none",
-                "help_text": "Path to reference genome in fasta format"
-            }
-        },
-        "Read mapping procesing options": {
-            "mapper": {
-                "default": "bowtie2",
-                "help_text": "mapping tool to use options [bwa, bowtie2]"
-            },
-            "minimum_base_quality": {
-                "default": "20",
-                "help_text": "minimum quality of a base for it to be carried forwards into the pileup and downstream to variant calling"
-            },
-            "only_report_alts": {
-                "default": "true",
-                "help_text": "When included this flag reports only ALT variants in the VCF output"
-            },
-            "VCF_filters": {
-                "default": "QUAL>=50 & MIN(DP)>=8 & ((ALT!=\".\" & DP4[2]>3 & DP4[3]>3) | (ALT=\".\" & DP4[0]>3 & DP4[1]>3))",
-                "help_text": "Parameters for filtering variants in VCF file. Default is to removing records with a quality score below 50 and also requiring 3 reads\n             from each strand with overall greater than 8."
-            },
-            "skip_filtering": {
-                "default": "false",
-                "help_text": "Do not filter variants called using `bcftools call` based on metrics defined with --VCF_filters."
-            },
-            "keep_raw_vcf": {
-                "default": "false",
-                "help_text": "Save the unfiltered VCF file i.e. direct output of `bcftools call`; can be combined with --only_report_alts=false\n            to report all (unfiltered, REF and ALT) variants; only relevant when --skip_filtering=false;"
-            },
-            "keep_sorted_bam": { 
-                "default": "false",
-                "help_text": "Save the mapping file (sorted BAM) and its index (.bai file)"
-            },
-            "keep_dedup_bam": { 
-                "default": "false",
-                "help_text": "Save the mapping file (sorted, then deduplicated BAM) generated with Picardtools"
-            },
-            "skip_read_deduplication": { 
-                "default": "false",
-                "help_text": "Skip removal of duplicate reads using Picard."
-            },
-            "bigwig": { 
-                "default": "false",
-                "help_text": "Produce bigwig genome coverage file from sorted BAM file using Deeptools. Saves the BAM index (.bai) file alongside."
-            },
-            "samtools_stats": { 
-                "default": "false",
-                "help_text": "Produce statistics summary files from sorted BAM using `samtools stats` and `samtools flagstats` commands."
-            },
-            "skip_cleanup": { 
-                "default": "false",
-                "help_text": "by default most intermediate files are deleted on successful completion of the pipeline, add this flag to keep intermediates"
-            }
-        }
+{
+  "pipeline": "Strain-mapper (sub-workflow)",
+  "params": {
+    "Read mapping input parameters": {
+      "reference": {
+        "default": "none",
+        "help_text": "Path to reference genome in fasta format"
+      }
+    },
+    "Read mapping procesing options": {
+      "mapper": {
+        "default": "bowtie2",
+        "help_text": "mapping tool to use options [bwa, bowtie2]"
+      },
+      "minimum_base_quality": {
+        "default": "20",
+        "help_text": "minimum quality of a base for it to be carried forwards into the pileup and downstream to variant calling"
+      },
+      "only_report_alts": {
+        "default": "true",
+        "help_text": "When included this flag reports only ALT variants in the VCF output"
+      },
+      "VCF_filters": {
+        "default": "QUAL>=50 & MIN(DP)>=8 & ((ALT!=\".\" & DP4[2]>3 & DP4[3]>3) | (ALT=\".\" & DP4[0]>3 & DP4[1]>3))",
+        "help_text": "Parameters for filtering variants in VCF file. Default is to removing records with a quality score below 50 and also requiring 3 reads\n             from each strand with overall greater than 8."
+      },
+      "skip_filtering": {
+        "default": "false",
+        "help_text": "Do not filter variants called using `bcftools call` based on metrics defined with --VCF_filters."
+      },
+      "keep_raw_vcf": {
+        "default": "false",
+        "help_text": "Save the unfiltered VCF file i.e. direct output of `bcftools call`; can be combined with --only_report_alts=false\n            to report all (unfiltered, REF and ALT) variants; only relevant when --skip_filtering=false;"
+      },
+      "keep_sorted_bam": {
+        "default": "false",
+        "help_text": "Save the mapping file (sorted BAM) and its index (.bai file)"
+      },
+      "keep_dedup_bam": {
+        "default": "false",
+        "help_text": "Save the mapping file (sorted, then deduplicated BAM) generated with Picardtools"
+      },
+      "skip_read_deduplication": {
+        "default": "false",
+        "help_text": "Skip removal of duplicate reads using Picard."
+      },
+      "bigwig": {
+        "default": "false",
+        "help_text": "Produce bigwig genome coverage file from sorted BAM file using Deeptools. Saves the BAM index (.bai) file alongside."
+      },
+      "samtools_stats": {
+        "default": "false",
+        "help_text": "Produce statistics summary files from sorted BAM using `samtools stats` and `samtools flagstats` commands."
+      },
+      "skip_cleanup": {
+        "default": "false",
+        "help_text": "by default most intermediate files are deleted on successful completion of the pipeline, add this flag to keep intermediates"
+      }
     }
+  }
 }
