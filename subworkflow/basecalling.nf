@@ -8,7 +8,7 @@ include { PYCOQC                                                                
 
 def validateSingleFormat(listOfFormats){
     if (listOfFormats.size() != 1) {
-        log.error("Multiple signal filetypes ${listOfFormats} found in '${params.raw_read_dir}'. Please separate filetypes into distinct directories and process indepedently.")
+        log.error("Multiple signal filetypes ${listOfFormats} found https://gitlab.internal.sanger.ac.uk/sanger-pathogens/pipelines/nanopore-basecalling/-/tree/master?ref_type=headsin '${params.raw_read_dir}'. Please separate filetypes into distinct directories and process indepedently.")
     }
 }
 
