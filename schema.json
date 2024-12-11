@@ -31,12 +31,9 @@
           "save_fastqs": {
               "default": "true",
               "help_text": "Save basecalled reads in FASTQ format."
+          }
       },
       "Reference Files": {
-          "reference": {
-              "default": "",
-              "help_text": "Path to the reference genome file. (mandatory)"
-          },
           "raw_read_dir": {
               "default": "",
               "help_text": "Directory containing raw read files. (mandatory)"
@@ -61,5 +58,4 @@
           }
       }
   }
-}
 }
