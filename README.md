@@ -19,7 +19,7 @@ This repository is for the code used for basecalling Nanopore data in either pod
    dorado download --model <model>
    ```
 
-   If a pre-downloaded model path is not provided to the pipeline, the model specified by the `--basecall_model` parameter will be downloaded on the fly.
+   If a pre-downloaded model path is not provided to the pipeline, the model specified by the `--basecall_model` parameter will be downloaded on the fly.    The default is set to "dna_r10.4.1_e8.2_400bps_hac@v4.3.0", other options available at https://github.com/nanoporetech/dorado.
 
 ## Usage
 
@@ -28,8 +28,7 @@ nextflow run long-read-ampliseq/main.nf \
 --raw_read_dir <directory containing FAST5/POD5 files> \
 --additional_metadata <CSV mapping sample IDs to barcodes> \
 ```
-
-instead of `-profile docker`, you can run the pipeline with `-profile laptop`. As well as enabling docker, the laptop profile allows the pipeline to be used offline by providing a local copy of a configuration file that is otherwise downloaded.
+You can run the pipeline with `-profile laptop`, as well as enabling docker, the laptop profile allows the pipeline to be used offline by providing a local copy of a configuration file that is otherwise downloaded.
 
 Should you need to run the pipeline offline, it is best to make use of pre-populated dependency caches. These can be created with any of the supported profiles (e.g. `-profile docker`) and involves running the pipeline once to completion. You will also need to provide a `--basecall_model_path` (see installation step 4)- the laptop profile includes a default local path for this, as well as the `--dorado_local_path`.
 
