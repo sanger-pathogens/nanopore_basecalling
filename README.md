@@ -26,7 +26,6 @@ This repository is for the code used for basecalling Nanopore data in either pod
 ```
 nextflow run long-read-ampliseq/main.nf \
 --raw_read_dir <directory containing FAST5/POD5 files> \
---reference <reference fasta> \
 --additional_metadata <CSV mapping sample IDs to barcodes> \
 --dorado_local_path <absolute path to Dorado executable> \
 -profile docker
