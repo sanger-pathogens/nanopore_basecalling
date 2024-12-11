@@ -1,5 +1,5 @@
 include:
-  - project: "sanger-pathogens/templates/ci-templates"
+  - project: "Nanopore Basecalling"
     ref: "$CI_CD_TEMPLATES_LATEST_STABLE"
     file: "Pipelines/PaM-Info-Nextflow.gitlab-ci.yml"
 #
