@@ -29,7 +29,7 @@ def printHelp() {
 //
 // SUBWORKFLOWS
 //
-include { BASECALLING                } from './subworkflow/basecalling.nf'
+include { ONT_BASECALLING                } from './assorted-sub-workflows/ont_basecalling.nf'
 
 /*
 ========================================================================================
@@ -51,7 +51,7 @@ workflow {
 
     if (params.basecall) {
         raw_reads = Channel.fromPath("${params.raw_read_dir}/*.{fast5,pod5}", checkIfExists: true)
-        BASECALLING(
+        ONT_BASECALLING(
             raw_reads,
             additional_metadata
         )
