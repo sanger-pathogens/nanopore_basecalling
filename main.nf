@@ -29,7 +29,7 @@ def printHelp() {
 //
 // SUBWORKFLOWS
 //
-include { ONT_BASECALLING                } from './assorted-sub-workflows/ont_basecalling.nf'
+include { ONT_BASECALLING                } from './assorted-sub-workflows/ont_basecalling/ont_basecalling.nf'
 
 /*
 ========================================================================================
