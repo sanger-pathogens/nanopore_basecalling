@@ -24,9 +24,11 @@ This repository is for the nextflow code used for basecalling Nanopore data from
 ## Usage
 
 ```
-nextflow run nanopore-basecalling/main.nf \
---raw_read_dir <directory containing FAST5/POD5 files> \
---additional_metadata <CSV mapping sample IDs to barcodes> \
+nextflow run main.nf \
+--raw_read_dir <path/to/raw_read/dir> \
+--additional_metadata <path/to/metadata> \
+--basecall_model <basecall_model> \
+--read_format "fastq" \
 ```
 
 For further configuration, see the `ONT_BASECALLING` [subworkflow's own documentation](assorted-sub-workflow/ont_basecalling/README.md).
