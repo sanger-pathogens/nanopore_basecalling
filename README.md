@@ -19,7 +19,7 @@ This repository is for the nextflow code used for basecalling Nanopore data from
    dorado download --model <model>
    ```
 
-   If a pre-downloaded model path is not provided to the pipeline, the model specified by the `--basecall_model` parameter will be downloaded on the fly. The default is set to "dna_r10.4.1_e8.2_400bps_hac@v4.3.0", other options available at https://github.com/nanoporetech/dorado.
+   If a pre-downloaded model path is not provided to the pipeline, the model specified by the `--basecall_model` parameter will be downloaded on the fly. Options available at https://github.com/nanoporetech/dorado.
 
 ## Usage
 
