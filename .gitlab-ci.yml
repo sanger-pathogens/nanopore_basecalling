@@ -33,9 +33,9 @@ pipeline_deploy_to_farm_prod:
 #     The FARM_NAME variable can be used to set the name of the module on the farm.
 #     The module name will be the same as your git project by default.
 
-#.pipeline_deploy_to_farm:
-#  variables:
-#    FARM_NAME: "put-your-chosen-module-name-here"
+.pipeline_deploy_to_farm:
+  variables:
+    FARM_NAME: "nanopore-basecalling"
 
 #     The check_scan_results job will add up the number of vulnerabilities found in each category (high, medium, etc.)
 #     You can set a limit on the number of vulnerabilities that will be tolerated before the job fails; if you need
