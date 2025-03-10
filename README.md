@@ -5,6 +5,7 @@ This pipeline processes Nanopore sequencing data in POD5 or FAST5 formats, suppo
 ## Usage
 
 Run the minimal pipeline with:
+
 ```
 nextflow run my-pipeline-importing-this-workflow/main.nf \
 --raw_read_dir <directory containing FAST5/POD5 files> \
@@ -16,9 +17,11 @@ nextflow run my-pipeline-importing-this-workflow/main.nf \
 Metadata CSV (Optional)
 
 Provide a CSV file to assign metadata according to barcode numbers:
+
 ```
 --additional_metadata <CSV mapping sample IDs to barcodes>
 ```
+
 The CSV format should be:
 
 ID,barcode
@@ -39,18 +42,23 @@ details for what is in the files can be found here
 ## Default Parameters
 
 Below are the default pipeline parameters:
+
 ```
 --min_qscore = 9
 ```
+
 ```
 --basecall_model = "sup"
 ```
+
 ```
 --trim_adapters = "all"
 ```
+
 ```
 --read_format = "fastq"
 ```
+
 ```
 --save_fastqs = true
 ```
