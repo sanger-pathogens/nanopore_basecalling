@@ -24,8 +24,10 @@ Provide a CSV file to assign metadata according to barcode numbers:
 
 The CSV format should be:
 
+```
 ID,barcode
-21GUS-SR-008,01
+Sample1,01
+```
 
 Custom Barcode Kits (Optional)
 
