@@ -7,7 +7,7 @@ This pipeline processes Nanopore sequencing data in POD5 or FAST5 formats, suppo
 Run the minimal pipeline with:
 
 ```
-nextflow run my-pipeline-importing-this-workflow/main.nf \
+nextflow run main.nf \
 --raw_read_dir <directory containing FAST5/POD5 files> \
 --barcode_kit_name <name of ONT barcoding kit used for multiplexing>
 ```
