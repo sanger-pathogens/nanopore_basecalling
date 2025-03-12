@@ -38,8 +38,7 @@ To specify custom kits, use the following parameters in addition to --barcode_ki
 --barcode_sequences <my custom barcodes as fasta>
 ```
 
-details for what is in the files can be found here
-[Custom Barocde arrangements](https://github.com/nanoporetech/dorado/blob/release-v0.9/documentation/CustomBarcodes.md)
+Details for what is in the files can be found in [here](https://github.com/nanoporetech/dorado/blob/release-v0.9/documentation/CustomBarcodes.md)
 
 ## Default Parameters
 
