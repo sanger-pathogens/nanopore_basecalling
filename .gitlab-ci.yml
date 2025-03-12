@@ -24,8 +24,7 @@ flake8:
 
 .pipeline_deploy_to_farm:
   variables:
-    FARM_NAME: "nanopore-basecalling"
-
+    FARM_NAME: "nanopore_basecalling"
 #     The check_scan_results job will add up the number of vulnerabilities found in each category (high, medium, etc.)
 #     You can set a limit on the number of vulnerabilities that will be tolerated before the job fails; if you need
 #     to do this, uncomment the section below and set the limits.  All default to zero.
