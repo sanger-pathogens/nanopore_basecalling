@@ -12,6 +12,20 @@ nextflow run main.nf \
 --barcode_kit_name <name of ONT barcoding kit used for multiplexing>
 ```
 
+it is important to note that the pipeline will by default choose the latest "sup" model to use. To change use the `--model` flag
+
+to either a level of basecalling
+
+```
+--model hac
+```
+
+or a specific model
+
+```
+--model dna_r10.4.1_e8.2_400bps_sup@v5.0.0
+```
+
 ### Additional Parameters
 
 Metadata CSV (Optional)
@@ -40,6 +54,22 @@ To specify custom kits, use the following parameters in addition to --barcode_ki
 
 Details for what is in the files can be found in [here](https://github.com/nanoporetech/dorado/blob/release-v0.9/documentation/CustomBarcodes.md)
 
+Modified bases aware basecalling (Optional)
+
+To specify models which are away of modified bases please supply
+
+```
+--modified_bases_models <model name>
+```
+
+for example 
+
+```
+--modified_bases_models dna_r10.4.1_e8.2_400bps_sup@v5.0.0_6mA@v3,dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v3
+```
+
+You should choose an appropiate model matching the input for --model
+
 ## Default Parameters
 
 Below are the default pipeline parameters:
@@ -49,7 +79,7 @@ Below are the default pipeline parameters:
 ```
 
 ```
---basecall_model = "sup"
+--model = "sup"
 ```
 
 ```
