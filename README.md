@@ -62,7 +62,7 @@ To specify models which are away of modified bases please supply
 --modified_bases_models <model name>
 ```
 
-for example 
+for example
 
 ```
 --modified_bases_models dna_r10.4.1_e8.2_400bps_sup@v5.0.0_6mA@v3,dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v3
