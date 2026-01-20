@@ -14,7 +14,7 @@ nextflow run main.nf \
 
 It is important to note that the pipeline will by default choose the latest "sup" model to use. To change this, use the `--model` flag.
 
-This can be set to either a level of basecalling
+This can be set to either a level of basecalling (fast, hac, sup)
 
 ```
 --model hac
