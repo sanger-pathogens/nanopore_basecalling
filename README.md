@@ -43,7 +43,7 @@ ID,barcode
 Sample1,01
 ```
 
-Custom Barcode Kits (Optional)
+#### Custom Barcode Kits (Optional)
 
 To specify custom kits, use the following parameters in addition to --barcode_kit_name:
 
