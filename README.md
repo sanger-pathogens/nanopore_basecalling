@@ -68,7 +68,7 @@ for example
 --modified_bases_models dna_r10.4.1_e8.2_400bps_sup@v5.0.0_6mA@v3,dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v3
 ```
 
-You should choose an appropiate model matching the input for --model
+You should choose an appropriate model matching the input for `--model`.
 
 ## Default Parameters
 
