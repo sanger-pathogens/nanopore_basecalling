@@ -24,7 +24,7 @@
       },
       "modified_bases_models": {
         "default": null,
-        "help_text": "Any additional models for calling modified bases can be supplied comma seperated with no spaces"
+        "help_text": "Any additional models for calling modified bases can be supplied comma-separated with no spaces."
       },
       "dorado_local_path": {
         "default": "",
