@@ -54,7 +54,7 @@ To specify custom kits, use the following parameters in addition to --barcode_ki
 
 Details for what is in the files can be found in [here](https://github.com/nanoporetech/dorado/blob/release-v0.9/documentation/CustomBarcodes.md)
 
-Modified bases aware basecalling (Optional)
+#### Modified bases aware basecalling (Optional)
 
 To specify models for modified base calling, please supply
 
