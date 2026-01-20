@@ -25,6 +25,7 @@ or a specific model
 ```
 --model dna_r10.4.1_e8.2_400bps_sup@v5.0.0
 ```
+Please refer to dorado documentation for a full model list: https://software-docs.nanoporetech.com/dorado/latest/models/list/
 
 ### Additional Parameters
 
