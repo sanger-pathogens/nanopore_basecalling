@@ -56,7 +56,7 @@ Details for what is in the files can be found in [here](https://github.com/nanop
 
 Modified bases aware basecalling (Optional)
 
-To specify models which are away of modified bases please supply
+To specify models for modified base calling, please supply
 
 ```
 --modified_bases_models <model name>
