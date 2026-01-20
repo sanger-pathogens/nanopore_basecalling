@@ -28,7 +28,7 @@ or a specific model
 
 ### Additional Parameters
 
-Metadata CSV (Optional)
+#### Metadata CSV (Optional)
 
 Provide a CSV file to assign metadata according to barcode numbers:
 
