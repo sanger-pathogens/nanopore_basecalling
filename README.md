@@ -12,9 +12,9 @@ nextflow run main.nf \
 --barcode_kit_name <name of ONT barcoding kit used for multiplexing>
 ```
 
-it is important to note that the pipeline will by default choose the latest "sup" model to use. To change use the `--model` flag
+It is important to note that the pipeline will by default choose the latest "sup" model to use. To change this, use the `--model` flag.
 
-to either a level of basecalling
+This can be set to either a level of basecalling
 
 ```
 --model hac
