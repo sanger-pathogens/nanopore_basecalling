@@ -129,41 +129,41 @@ my_output/
 
 **Basecalling**
 
-| Option | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--raw_read_dir` | `path` | `""` | Directory containing raw POD5 or FAST5 files (mandatory). |
-| `--model` | `string` | `sup` | Dorado basecalling model. Can be an accuracy level (`fast`, `hac`, `sup`) or a full model name (e.g. `dna_r10.4.1_e8.2_400bps_sup@v5.0.0`). See [Dorado model list](https://software-docs.nanoporetech.com/dorado/latest/models/list/). |
-| `--min_qscore` | `integer` | `9` | Minimum Q-score filter applied during basecalling. |
-| `--trim_adapters` | `string` | `all` | Adapter/primer trimming mode. `all` trims any detected adapters or primers. |
-| `--barcode_kit_name` | `string` | `null` | Barcode kit used for multiplexing (e.g. `SQK-NBD114-24`). Required for demultiplexing. |
-| `--modified_bases_models` | `string` | `null` | Comma-separated list of modified base models. Must match the basecalling model. |
-| `--barcode_arrangement` | `path` | `null` | Custom barcode arrangement TOML file. Requires `--barcode_kit_name` and `--barcode_sequences`. |
-| `--barcode_sequences` | `path` | `null` | Custom barcode FASTA file. Requires `--barcode_kit_name` and `--barcode_arrangement`. |
+| Option                    | Type      | Default | Description                                                                                                                                                                                                                             |
+| ------------------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--raw_read_dir`          | `path`    | `""`    | Directory containing raw POD5 or FAST5 files (mandatory).                                                                                                                                                                               |
+| `--model`                 | `string`  | `sup`   | Dorado basecalling model. Can be an accuracy level (`fast`, `hac`, `sup`) or a full model name (e.g. `dna_r10.4.1_e8.2_400bps_sup@v5.0.0`). See [Dorado model list](https://software-docs.nanoporetech.com/dorado/latest/models/list/). |
+| `--min_qscore`            | `integer` | `9`     | Minimum Q-score filter applied during basecalling.                                                                                                                                                                                      |
+| `--trim_adapters`         | `string`  | `all`   | Adapter/primer trimming mode. `all` trims any detected adapters or primers.                                                                                                                                                             |
+| `--barcode_kit_name`      | `string`  | `null`  | Barcode kit used for multiplexing (e.g. `SQK-NBD114-24`). Required for demultiplexing.                                                                                                                                                  |
+| `--modified_bases_models` | `string`  | `null`  | Comma-separated list of modified base models. Must match the basecalling model.                                                                                                                                                         |
+| `--barcode_arrangement`   | `path`    | `null`  | Custom barcode arrangement TOML file. Requires `--barcode_kit_name` and `--barcode_sequences`.                                                                                                                                          |
+| `--barcode_sequences`     | `path`    | `null`  | Custom barcode FASTA file. Requires `--barcode_kit_name` and `--barcode_arrangement`.                                                                                                                                                   |
 
 ---
 
 **Output**
 
-| Option | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--read_format` | `string` | `fastq` | Output format for basecalled reads. One of: `fastq`, `bam`. |
-| `--save_fastqs` | `boolean` | `true` | Save FASTQ files to the output directory (only applies when `--read_format fastq`). |
-| `--outdir` | `path` | `results` | Top-level output directory. |
+| Option          | Type      | Default   | Description                                                                         |
+| --------------- | --------- | --------- | ----------------------------------------------------------------------------------- |
+| `--read_format` | `string`  | `fastq`   | Output format for basecalled reads. One of: `fastq`, `bam`.                         |
+| `--save_fastqs` | `boolean` | `true`    | Save FASTQ files to the output directory (only applies when `--read_format fastq`). |
+| `--outdir`      | `path`    | `results` | Top-level output directory.                                                         |
 
 ---
 
 **Metadata**
 
-| Option | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--additional_metadata` | `path` | `null` | CSV file with `ID,barcode` columns to assign sample names to barcodes. |
+| Option                  | Type   | Default | Description                                                            |
+| ----------------------- | ------ | ------- | ---------------------------------------------------------------------- |
+| `--additional_metadata` | `path` | `null`  | CSV file with `ID,barcode` columns to assign sample names to barcodes. |
 
 ---
 
 **General**
 
-| Option | Type | Default | Description |
-| --- | --- | --- | --- |
+| Option              | Type      | Default | Description                  |
+| ------------------- | --------- | ------- | ---------------------------- |
 | `--monochrome_logs` | `boolean` | `false` | Disable coloured log output. |
 
 ### Advanced usage
@@ -201,12 +201,12 @@ All software dependencies are containerised. No local tool installations are req
 
 ## Software versions
 
-| Software | Version | Image |
-| --- | --- | --- |
-| Dorado (cuda) | 1.3.1 | `quay.io/sangerpathogens/cuda_dorado:1.3.1` |
-| pod5 | 0.3.6 | `quay.io/sangerpathogens/pod5:0.3.6` |
-| Samtools | 1.19.2 | `quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1` |
-| PycoQC | 2.5.2 | `quay.io/biocontainers/pycoqc:2.5.2--py_0` |
+| Software      | Version | Image                                               |
+| ------------- | ------- | --------------------------------------------------- |
+| Dorado (cuda) | 1.3.1   | `quay.io/sangerpathogens/cuda_dorado:1.3.1`         |
+| pod5          | 0.3.6   | `quay.io/sangerpathogens/pod5:0.3.6`                |
+| Samtools      | 1.19.2  | `quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1` |
+| PycoQC        | 2.5.2   | `quay.io/biocontainers/pycoqc:2.5.2--py_0`          |
 
 ## Troubleshooting
 
