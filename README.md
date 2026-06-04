@@ -26,7 +26,7 @@ Basecalling requires a GPU (the pipeline submits GPU jobs on the Sanger HPC auto
 1. Clone this repository:
 
    ```bash
-   git clone --recurse-submodules https://gitlab.internal.sanger.ac.uk/sanger-pathogens/pipelines/nanopore_basecalling.git
+   git clone --recurse-submodules <repo-url>
    cd nanopore_basecalling
    ```
 
