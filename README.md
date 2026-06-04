@@ -215,7 +215,9 @@ All software dependencies are containerised. No local tool installations are req
 - **Basecalling model not found**: verify the model name against the [Dorado model list](https://software-docs.nanoporetech.com/dorado/latest/models/list/). For versioned models the full string (e.g. `dna_r10.4.1_e8.2_400bps_sup@v5.0.0`) must match exactly.
 - **Empty metadata file**: if `--additional_metadata` is provided but the file is empty, the pipeline will exit with an error. Check the file contains the expected `ID,barcode` header and at least one data row.
 - **Resuming a failed run**: add `-resume` to your command to restart from cached intermediate results.
-- For further help, check the Nextflow log (`.nextflow.log`) and the per-process logs in the `work/` directory.
+- For further help, check `.nextflow.log` and the per-process `.command.log` logs in the `work/` directory.
+
+Sanger users may find [this page](https://ssg-confluence.internal.sanger.ac.uk/spaces/PaMI/pages/181078206/General+pipeline+info#Generalpipelineinfo-Troubleshootingafailedpipelinerunandsendingabugreport) useful for troubleshooting Nextflow pipeline runs.
 
 ## Issues and Contributions
 
