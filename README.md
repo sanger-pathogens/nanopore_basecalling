@@ -113,7 +113,7 @@ Results are written to `--outdir` (default: `results`) with the following struct
 
 ```
 my_output/
-  fastqs/                                    # Per-barcode gzipped FASTQ files (--read_format fastq)
+  fastqs/                                    # Per-barcode gzipped FASTQ files (--read_format fastq and --save_fastqs true)
     <SampleID_or_kit_barcode>.fastq.gz
   bams/                                      # Per-barcode BAM files (--read_format bam)
     <SampleID_or_kit_barcode>.bam
