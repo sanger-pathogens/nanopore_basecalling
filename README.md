@@ -51,6 +51,8 @@ Basecalling requires a GPU (the pipeline submits GPU jobs on the Sanger HPC auto
    rm -rf work .nextflow*
    ```
 
+   Alternatively, use `nextflow clean` for more fine-grained control over which runs and intermediate files are removed.
+
    See [Parameters](#parameters) for all available options.
 
 #### Using on the Sanger farm
