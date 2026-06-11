@@ -205,8 +205,6 @@ All software dependencies are containerised. No local tool installations are req
 
 ## Troubleshooting
 
-- **No GPU available**: basecalling requires a CUDA GPU. On the Sanger HPC, ensure you are submitting to a GPU-enabled queue. Locally, ensure your container runtime is configured with GPU pass-through.
-- **Mixed file formats in `--raw_read_dir`**: FAST5 and POD5 files cannot be mixed in the same input directory. Separate them into distinct directories and run the pipeline independently for each.
 - **Basecalling model not found**: verify the model name against the [Dorado model list](https://software-docs.nanoporetech.com/dorado/latest/models/list/). For versioned models the full string (e.g. `dna_r10.4.1_e8.2_400bps_sup@v5.0.0`) must match exactly.
 - **Empty metadata file**: if `--additional_metadata` is provided but the file is empty, the pipeline will exit with an error. Check the file contains the expected `ID,barcode` header and at least one data row.
 - **Resuming a failed run**: add `-resume` to your command to restart from cached intermediate results.
