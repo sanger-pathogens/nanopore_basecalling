@@ -128,11 +128,21 @@ my_output/
 
 ### Parameters
 
-**Basecalling**
+**Input/Output options**
+| Option | Type | Default | Description |
+| ------------------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--raw_read_dir` | `path` | `""` | Directory containing raw POD5 or FAST5 files (required). |
+| `--additional_metadata` | `path` | `null` | CSV file with `ID,barcode` columns to assign sample names to barcodes. |
+| `--read_format` | `string` | `fastq` | Output format for basecalled reads. One of: `fastq`, `bam`. |
+| `--save_fastqs` | `boolean` | `true` | Save FASTQ files to the output directory (only applies when `--read_format fastq`). |
+| `--outdir` | `path` | `results` | Top-level output directory. |
+
+---
+
+**Basecalling options**
 
 | Option                    | Type      | Default | Description                                                                                                                                                                                                                             |
 | ------------------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--raw_read_dir`          | `path`    | `""`    | Directory containing raw POD5 or FAST5 files (mandatory).                                                                                                                                                                               |
 | `--model`                 | `string`  | `sup`   | Dorado basecalling model. Can be an accuracy level (`fast`, `hac`, `sup`) or a full model name (e.g. `dna_r10.4.1_e8.2_400bps_sup@v5.0.0`). See [Dorado model list](https://software-docs.nanoporetech.com/dorado/latest/models/list/). |
 | `--min_qscore`            | `integer` | `9`     | Minimum Q-score filter applied during basecalling.                                                                                                                                                                                      |
 | `--trim_adapters`         | `string`  | `all`   | Adapter/primer trimming mode. `all` trims any detected adapters or primers.                                                                                                                                                             |
@@ -143,25 +153,7 @@ my_output/
 
 ---
 
-**Output**
-
-| Option          | Type      | Default   | Description                                                                         |
-| --------------- | --------- | --------- | ----------------------------------------------------------------------------------- |
-| `--read_format` | `string`  | `fastq`   | Output format for basecalled reads. One of: `fastq`, `bam`.                         |
-| `--save_fastqs` | `boolean` | `true`    | Save FASTQ files to the output directory (only applies when `--read_format fastq`). |
-| `--outdir`      | `path`    | `results` | Top-level output directory.                                                         |
-
----
-
-**Metadata**
-
-| Option                  | Type   | Default | Description                                                            |
-| ----------------------- | ------ | ------- | ---------------------------------------------------------------------- |
-| `--additional_metadata` | `path` | `null`  | CSV file with `ID,barcode` columns to assign sample names to barcodes. |
-
----
-
-**General**
+**Logging options**
 
 | Option              | Type      | Default | Description                  |
 | ------------------- | --------- | ------- | ---------------------------- |
@@ -182,6 +174,8 @@ The `--model` parameter accepts either a shorthand accuracy level or a fully qua
 ```
 
 Always ensure the model matches the flow cell chemistry and kit used for sequencing. Refer to the [Dorado documentation](https://software-docs.nanoporetech.com/dorado/latest/models/list/) for the full model list.
+
+The chosen model(s) will be downloaded on-the-fly during the run, there is no need to pre-download these.
 
 #### Modified base calling
 
