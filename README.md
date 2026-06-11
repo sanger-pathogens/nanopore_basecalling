@@ -1,4 +1,4 @@
-# nanopore_basecalling
+# Nanopore Basecalling
 
 [[_TOC_]]
 
@@ -8,12 +8,11 @@ nanopore_basecalling is a Nextflow DSL2 pipeline for basecalling Oxford Nanopore
 
 The pipeline performs the following steps:
 
-1. **Format conversion** — FAST5 files are converted to POD5 format using the `pod5` tool. POD5 files are passed through directly (after merging).
-2. **Basecalling** — [Dorado](https://github.com/nanoporetech/dorado) calls bases from the merged POD5 file. A sequencing summary TSV is generated alongside the basecalled BAM.
-3. **Demultiplexing** — if a barcode kit is specified, Dorado demuxes the basecalled BAM into per-barcode BAM files.
-4. **Metadata assignment** — barcode BAMs are optionally joined to a user-supplied metadata CSV to assign sample IDs to barcodes.
-5. **FASTQ conversion** — demultiplexed BAMs are converted to gzipped FASTQ files with Samtools (when `--read_format fastq`).
-6. **QC** — PycoQC generates an interactive HTML quality report from the Dorado sequencing summary.
+1. **Basecalling** using [Dorado](https://github.com/nanoporetech/dorado). A sequencing summary TSV is generated alongside the basecalled BAM.
+2. **Demultiplexing** — if a barcode kit is specified, Dorado demultiplexes the basecalled BAM into per-barcode BAM files.
+3. **Metadata assignment** — barcode BAMs are optionally joined to a user-supplied metadata CSV to assign sample IDs to barcodes.
+4. **FASTQ conversion** — demultiplexed BAMs are converted to gzipped FASTQ files with Samtools (when `--read_format fastq`).
+5. **QC** — PycoQC generates an interactive HTML quality report from the Dorado sequencing summary.
 
 Basecalling requires a GPU (the pipeline submits GPU jobs on the Sanger HPC automatically via the `gpu` process label).
 
@@ -84,7 +83,7 @@ bsub -o basecalling.o -e basecalling.e -q oversubscribed \
 
 #### Raw read directory (`--raw_read_dir`)
 
-A directory containing raw Oxford Nanopore signal files in either POD5 (`.pod5`) or FAST5 (`.fast5`) format. All files in the directory must be of the same format — mixed directories are not supported.
+A directory containing raw Oxford Nanopore signal files - either already in POD5 (`.pod5`) format or FAST5 (`.fast5`) format which will be converted to POD5 automatically. All files in the directory must be of the same format — mixed directories are not supported.
 
 ```
 raw_reads/
@@ -186,16 +185,16 @@ Always ensure the model matches the flow cell chemistry and kit used for sequenc
 
 #### Modified base calling
 
-To call modified bases simultaneously with standard basecalling, supply one or more modification models with `--modified_bases_models` (comma-separated, no spaces):
+To call modified bases simultaneously with standard basecalling, supply one or more modification models with `--modified_bases_models` (comma-separated, no spaces) e.g.:
 
 ```bash
 --model dna_r10.4.1_e8.2_400bps_sup@v5.0.0 \
---modified_bases_models dna_r10.4.1_e8.2_400bps_sup@v5.0.0_6mA@v3
+--modified_bases_models dna_r10.4.1_e8.2_400bps_sup@v5.0.0_6mA@v3,dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v3
 ```
 
 #### GPU requirements
 
-Basecalling is GPU-accelerated and requires a CUDA-capable GPU. On the Sanger HPC the pipeline automatically requests GPU nodes via LSF. When running locally, ensure your container runtime has GPU access (`--gpus all` for Docker; `--nv` for Singularity).
+Basecalling is GPU-accelerated and requires a CUDA-capable GPU. On the Sanger HPC the pipeline automatically requests GPU nodes via LSF. When running elsewhere, ensure your container runtime has GPU access (`--gpus all` for Docker; `--nv` for Singularity).
 
 ### Dependencies
 
@@ -217,7 +216,8 @@ All software dependencies are containerised. No local tool installations are req
 - **Basecalling model not found**: verify the model name against the [Dorado model list](https://software-docs.nanoporetech.com/dorado/latest/models/list/). For versioned models the full string (e.g. `dna_r10.4.1_e8.2_400bps_sup@v5.0.0`) must match exactly.
 - **Empty metadata file**: if `--additional_metadata` is provided but the file is empty, the pipeline will exit with an error. Check the file contains the expected `ID,barcode` header and at least one data row.
 - **Resuming a failed run**: add `-resume` to your command to restart from cached intermediate results.
-- For further help, check `.nextflow.log` and the per-process `.command.log` logs in the `work/` directory.
+
+For further help, check `.nextflow.log` and the per-process `.command.log` logs in the `work/` directory.
 
 Sanger users may find [this page](https://ssg-confluence.internal.sanger.ac.uk/spaces/PaMI/pages/181078206/General+pipeline+info#Generalpipelineinfo-Troubleshootingafailedpipelinerunandsendingabugreport) useful for troubleshooting Nextflow pipeline runs.
 
