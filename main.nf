@@ -43,7 +43,11 @@ workflow {
         exit 0
     }
 
-    raw_reads = Channel.fromPath("${params.raw_read_dir}/*.{fast5,pod5}", checkIfExists: true)
+    if (params.read_dir_manifest) {
+        raw_reads = READ_MANIFEST_OF_DIRS(params.read_dir_manifest)
+    } else {
+        raw_reads = Channel.fromPath("${params.raw_read_dir}/*.{fast5,pod5}", checkIfExists: true)
+    }
 
     ONT_BASECALLING(raw_reads)
 
