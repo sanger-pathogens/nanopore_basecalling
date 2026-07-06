@@ -29,6 +29,8 @@ def printHelp() {
 //
 // SUBWORKFLOWS
 //
+include { MANIFEST_PARSE; 
+          cli_parse         } from './subworkflows/input_check.nf'
 include { ONT_BASECALLING   } from './assorted-sub-workflows/ont_basecalling/ont_basecalling.nf'
 
 /*
@@ -43,9 +45,20 @@ workflow {
         exit 0
     }
 
-    raw_reads = Channel.fromPath("${params.raw_read_dir}/*.{fast5,pod5}", checkIfExists: true)
+    if (!params.manifest && !params.raw_read_dir) {
+        exit 1, "Must provide either --manifest or --raw_read_dir"
+    }
 
-    ONT_BASECALLING(raw_reads)
+    manifest_reads = params.manifest
+        ? MANIFEST_PARSE(channel.fromPath(params.manifest, checkIfExists: true))
+        : channel.empty()
+
+    cli_reads = params.raw_read_dir
+        ? channel.of(cli_parse(params.raw_read_dir))
+        : channel.empty()
+
+    cli_reads.mix(manifest_reads)
+    | ONT_BASECALLING
 
 }
 
