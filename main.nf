@@ -7,13 +7,6 @@
 ========================================================================================
 */
 
-def logo = NextflowTool.logo(workflow, params.monochrome_logs)
-
-log.info logo
-
-NextflowTool.commandLineParams(workflow.commandLine, log, params.monochrome_logs)
-
-
 def printHelp() {
     NextflowTool.help_message("${workflow.ProjectDir}/schema.json", 
                                [],
@@ -40,6 +33,12 @@ include { ONT_BASECALLING   } from './assorted-sub-workflows/ont_basecalling/ont
 */
 
 workflow {
+    def logo = NextflowTool.logo(workflow, params.monochrome_logs)
+
+    log.info logo
+
+    NextflowTool.commandLineParams(workflow.commandLine, log, params.monochrome_logs)
+
     if (params.help) {
         printHelp()
         exit 0
@@ -60,15 +59,16 @@ workflow {
     cli_reads.mix(manifest_reads)
     | ONT_BASECALLING
 
-}
-
-workflow.onComplete {
+    /*
+    workflow.onComplete {
         NextflowTool.summary(workflow, params, log)
 
         log.info """
                 To rerun from ${workflow.launchDir}:
                 bsub -q oversubscribed -R "select[mem>4000] rusage[mem=4000]" -M4000 -o ${workflow.runName}_repeat.o -e ${workflow.runName}_repeat.e -J ${workflow.runName}_repeat ${workflow.commandLine}
                 """
+    }
+    */
 }
 /*
 ========================================================================================
